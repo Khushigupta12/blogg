@@ -11,7 +11,7 @@ export const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post(`/auth/register`,{
+            const { data } = await axios.post(`https://api-2jif.onrender.com/auth/register`,{
                 username: username,
                 email:email,
                 password: password
