@@ -1,0 +1,121 @@
+import React, { useState } from "react";
+import "./login.css";
+import back from "../../assets/images/my-account.jpg";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+export const Register = () => {
+  const navigate = useNavigate();
+  // const [inputs, setInputs] = useState({
+  //   username: "",
+  //   email: "",
+  //   password: "",
+  // });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+   const [email, setEmail] = useState("");
+  // const [error, setError] = useState(false);
+
+  //handle input change
+  const handleuser = (e) => {
+    setUsername((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const handleemail = (e) => {
+    setEmail((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const handlepass = (e) => {
+    setPassword((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  //form handle
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("http://localhost:5000/auth/register", {
+        username: username,
+        email: email,
+        password: password,
+      });
+      console.log(data);
+      if (data.success) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [error, setError] = useState(false);
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setError(false);
+  //   try {
+  //     const res = await axios.post("/auth/register", {
+  //       username,
+  //       email,
+  //       password,
+  //     });
+  //     res.data && window.location.replace("/login");
+  //   } catch (error) {
+  //     setError(true);
+  //   }
+  // };
+  return (
+    <>
+      <section className="login">
+        <div className="container">
+          <div className="backImg">
+            <img src={back} alt="" />
+            <div className="text">
+              <h3>Register</h3>
+              <h1>My account</h1>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            <span>Email address *</span>
+            <input
+              type="text"
+              required
+              value={email}
+              onChange={handleemail}
+              name="email"
+            />
+            <span>Username *</span>
+            <input
+              type="text"
+              required
+              value={username}
+              onChange={handleuser}
+              name="username"
+            />
+            <span>Password *</span>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={handlepass}
+              name="password"
+            />
+            <button type="submit" className="button">
+              Register
+            </button>
+          </form>
+          {/* {error && <span style={{ color: "red" }}>Someting went wrong</span>} */}
+        </div>
+      </section>
+    </>
+  );
+};

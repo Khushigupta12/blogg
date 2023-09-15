@@ -1,0 +1,63 @@
+.accountInfo {
+  margin: 115px 0;
+}
+.accountInfo .container {
+  overflow-x: hidden;
+  padding: 50px;
+  max-width: 100%;
+  margin: auto;
+  background-color: white;
+}
+.accountInfo .content {
+  margin-top: 80px;
+  display: flex;
+  justify-content: flex-start;
+}
+.accountInfo .left {
+  width: 150px;
+  position: relative;
+}
+.accountInfo .right {
+  width: calc(100% - 180px);
+  margin-left: 50px;
+}
+
+.accountInfo .left .img input {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+}
+/* .icon{
+  font-size: 50px;
+  margin-left: 100px;
+} */
+.accountInfo .img img {
+  /* margin-left: 50px; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+.accountInfo .right label {
+  font-size: 17px;
+  color: #000;
+  margin-bottom: 10px;
+  display: block;
+}
+.accountInfo .right{
+  margin-top: -40px;
+}
+@media screen and (max-width:1280){
+  .accountInfo .container {
+  padding: 10px;
+  max-width: 90%;
+  margin: auto;
+  background-color: blue;
+  }
+}

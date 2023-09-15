@@ -1,0 +1,129 @@
+import React, { useContext, useState } from "react";
+import image from "../../assets/images/input.png";
+import "./account.css";
+import { Context } from "../../context/Context";
+import axios from "axios";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+
+export const Account = () => {
+  const { user, dispatch } = useContext(Context);
+  // same from create file
+  const navigate = useNavigate();
+  const [file, setFile] = useState(null);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [succ, setSucc] = useState(false);
+  // const PublicFlo = "http://localhost:5000/images/";
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "UPDATE_START" });
+    // const updateUser = {
+    //   userId: user._id,
+    //   username,
+    //   email,
+    //   password,
+    // };
+    // console.log(updateUser);
+    // if (file) {
+    //   const data = new FormData();
+    //   const filename = Date.now() + file.name;
+    //   data.append("name", filename);
+    //   data.append("file", file);
+    //   user.profilePic = filename;
+
+    //   try {
+    //     await axios.post("/upload", data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+    try {
+      const { data } = await axios.put("/users/" + user._id, {
+        userId: user._id,
+        username,
+        email,
+        password,
+      });
+      console.log(data);
+      setSucc(true);
+      dispatch({ type: "UPDATE_SUCC", payload: data });
+      navigate("/")
+    } catch (error) {
+      dispatch({ type: "UPDATE_FAILED" });
+      navigate("/register")
+    }
+  };
+  const handleuser = (e) => {
+    setUsername(e.target.value);
+  };
+  const handlepass = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleemail = (e) => {
+    setEmail(e.target.value);
+  };
+  
+  return (
+    <>
+      <section className="accountInfo">
+        <div className="container boxItems">
+          <h1>Account Information</h1>
+          <div className="content">
+            <div className="left">
+              <div className="img flexCenter">
+                {/*<input type="file" accept="image/*" src={image} alt="img" /> */}
+                 <img src={image} alt="" class="image-preview" /> 
+                {/* <img
+                  src={
+                    file
+                      ? URL.createObjectURL(file)
+                      : PublicFlo + user.profilePic
+                  }
+                  alt="" */}
+                {/* /> */}
+                <label htmlFor="inputfile">
+                  <IoIosAddCircleOutline className="icon" />
+                </label>
+                <input
+                  type="file"
+                  id="inputfile"
+                  style={{ display: "none" }}
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+              </div>
+            </div>
+            <form className="right" >
+              <label htmlFor="">Username</label>
+              <input
+                type="text"
+                placeholder={user.username}
+                value={username}
+                onChange={handleuser}
+              />
+              <label htmlFor="">Email</label>
+              <input
+                type="email"
+                placeholder={user.email}
+                value={email}
+                onChange={handleemail}
+              />
+              <label htmlFor="">Password</label>
+              <input
+                type="password"
+                placeholder={user.password}
+                value={password}
+                onChange={handlepass}
+              />
+              <button className="button" type="submit" onClick={handleSubmit}>
+                Update
+              </button>
+              {succ && <span>Profile is Updated</span>}
+            </form>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};

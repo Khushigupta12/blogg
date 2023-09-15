@@ -1,0 +1,88 @@
+import React, { useEffect } from "react";
+import "./create.css";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { useState } from "react";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+
+export const Create = () => {
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  // const [file, setFile] = useState(null)
+  const { user } = useContext(Context);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const newPost = {
+    //   username: user.username,
+    //   title,
+    //   desc,
+    // };
+
+    // if (file) {
+    //   const data = new FormData()
+    //   const filename = Date.now() + file.name
+    //   data.append("name", filename)
+    //   data.append("file", file)
+    //   newPost.photo = filename
+
+    //   try {
+    //     await axios.post("/upload", data)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
+    try {
+      console.log(title);
+      // console.log(title);
+      console.log(user.username);
+      const  res  = await axios.post("/posts/", {
+        username: user.username,
+        title: title,
+        desc: desc,
+      });
+      console.log(res.data);
+      window.location.replace("/");
+      // window.location.replace("/post/" + data._id)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  const handletitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handledesc = (e) => {
+    setDesc(e.target.value);
+  };
+  return (
+    <>
+      <section className="newPost">
+        <div className="container boxItems">
+          {/* <div className='img '>{file && <img src={URL.createObjectURL(file)} alt='images' />}</div> */}
+          <form onSubmit={handleSubmit}>
+            <div className="inputfile flexCenter">
+              <label htmlFor="inputfile">
+                <IoIosAddCircleOutline />
+              </label>
+              heyylooo man
+              <input type="file" id="inputfile" style={{ display: "none" }} />
+            </div>
+            <input type="text" placeholder="Title" value={title} onChange={handletitle} />
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              onChange={handledesc}
+              value={desc}
+            ></textarea>
+            <button className="button">Create Post</button>
+          </form>
+        </div>
+      </section>
+    </>
+  );
+};
