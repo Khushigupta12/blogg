@@ -23,7 +23,7 @@ const User = () => {
     setProfileOpen(false);
   };
 
-  const PublicFlo = "https://api-2jif.onrender.com/images/";
+  const PublicFlo = "https://blogapi-h8nx.onrender.com//images/";
   return (
     <>
       <div className="profile">
