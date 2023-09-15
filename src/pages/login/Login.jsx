@@ -22,7 +22,7 @@ export const Login = () => {
        );
        console.log(data);
        dispatch({ type: "LOGINSUCC", payload: data });
-       navigate("https://blogapi-h8nx.onrender.com/");
+       navigate("/");
       //  if(data){
       //   // const myForm = new FormData();
       //   // myForm.set("user", data._id);
@@ -33,7 +33,7 @@ export const Login = () => {
     } catch (error) {
       console.log(error);
       dispatch({ type: "LOGINFAILED" });
-      navigate("https://blogapi-h8nx.onrender.com/register");
+      navigate("/register");
     }
   }
   console.log(FetchData);
