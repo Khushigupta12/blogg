@@ -66,7 +66,7 @@ export const DetailsPages = () => {
         title,
         desc,
       });
-      window.location.reload()
+      window.location.replace("/")
     } catch (error) {}
   }
 
