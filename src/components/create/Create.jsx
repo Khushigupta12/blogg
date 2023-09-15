@@ -39,7 +39,7 @@ export const Create = () => {
     try {
       const res = await axios.post("https://blogapi-h8nx.onrender.com/posts", newPost)
       console.log(res);
-      window.location.replace("https://blogapi-h8nx.onrender.com/post/" + res.data._id)
+      window.location.replace("/post/" + res.data._id)
     } catch (error) {}
   }
 
