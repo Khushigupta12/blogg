@@ -100,7 +100,7 @@ export const Login = () => {
             </button>
 
             <Link
-              to="https://blogapi-h8nx.onrender.com/register"
+              to="/register"
               className="link"
               style={{ color: "blue", marginTop: "5px" }}
             >
