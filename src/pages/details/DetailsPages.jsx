@@ -119,7 +119,7 @@ export const DetailsPages = () => {
             <p>
               Author:{" "}
               <Link
-                to={`https://blogapi-h8nx.onrender.com/?user=${post.username}`}
+                to={`/?user=${post.username}`}
               >
                 {post.username}
               </Link>
