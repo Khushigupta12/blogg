@@ -47,7 +47,7 @@ export const Account = () => {
       );
       setSucc(true)
       dispatch({ type: "UPDATE_SUCC", payload: res.data })
-      window.location.reload()
+      window.location.replace("/")
     } catch (error) {
       dispatch({ type: "UPDATE_FAILED" })
     }
